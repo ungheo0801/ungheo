@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ung Heo | Portfolio</title>
+  <style>
+    :root {
+      --bg: #f6f7f5;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-strong: rgba(255, 255, 255, 0.9);
+      --text: #202525;
+      --muted: #5f6a68;
+      --line: rgba(32, 37, 37, 0.08);
+      --accent: #5d7a73;
+      --accent-soft: #d9e5e1;
+      --shadow: 0 10px 30px rgba(33, 42, 40, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(93, 122, 115, 0.12), transparent 24%),
+        radial-gradient(circle at 85% 15%, rgba(168, 188, 181, 0.18), transparent 20%),
+        linear-gradient(180deg, #fbfcfb 0%, var(--bg) 100%);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(246, 247, 245, 0.72);
+      border-bottom: 1px solid rgba(32, 37, 37, 0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent-soft), #edf3f1);
+      color: var(--accent);
+      font-size: 0.95rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 10px 14px;
+      color: var(--muted);
+      border-radius: 999px;
+      transition: 180ms ease;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+
+    .hero {
+      padding: 68px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-card {
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 460px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(93, 122, 115, 0.08);
+      color: var(--accent);
+      font-size: 0.88rem;
+      width: fit-content;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      font-weight: 700;
+    }
+
+    .hero-card p {
+      max-width: 58ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 22px 0 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: 180ms ease;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, #5d7a73, #425954);
+      box-shadow: 0 10px 24px rgba(66, 89, 84, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(66, 89, 84, 0.24);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.76);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-strong);
+    }
+
+    .hero-side {
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .portrait {
+      border-radius: 22px;
+      min-height: 260px;
+      background:
+        linear-gradient(160deg, rgba(93, 122, 115, 0.18), rgba(255,255,255,0.75)),
+        linear-gradient(135deg, #eef3f1, #dde5e2);
+      display: flex;
+      align-items: end;
+      justify-content: start;
+      overflow: hidden;
+      position: relative;
+      padding: 22px;
+    }
+
+    .portrait::after {
+      content: "Replace with portrait or lab photo";
+      position: absolute;
+      inset: auto 18px 18px auto;
+      font-size: 0.82rem;
+      color: rgba(32,37,37,0.45);
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(32,37,37,0.06);
+    }
+
+    .portrait-badge {
+      position: relative;
+      z-index: 1;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(32,37,37,0.06);
+      font-size: 0.95rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .mini-card .label {
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin-bottom: 8px;
+    }
+
+    .mini-card .value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    section {
+      padding: 28px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 52ch;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .project-card {
+      grid-column: span 6;
+      overflow: hidden;
+    }
+
+    .project-media {
+      aspect-ratio: 16 / 10;
+      background:
+        linear-gradient(150deg, rgba(93, 122, 115, 0.2), rgba(255,255,255,0.5)),
+        linear-gradient(135deg, #e9efed, #d7e1dd);
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    .project-media::before {
+      content: "Image / CAD / Video thumbnail";
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      color: rgba(32,37,37,0.5);
+      font-size: 0.9rem;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(32,37,37,0.06);
+    }
+
+    .project-body {
+      padding: 22px;
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(93,122,115,0.08);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .project-body h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .project-body p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .meta-pill {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(32,37,37,0.04);
+      color: #43504d;
+      font-size: 0.82rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project-links a {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.94rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 18px;
+      padding: 20px 22px;
+    }
+
+    .timeline-year {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 6px;
+      font-size: 1.06rem;
+      letter-spacing: -0.03em;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 0.95fr;
+      gap: 18px;
+    }
+
+    .card-pad {
+      padding: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid var(--line);
+    }
+
+    .list strong {
+      display: block;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .list span {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .contact-card {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .contact-item {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.68);
+      border: 1px solid var(--line);
+    }
+
+    .contact-item .label {
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-bottom: 6px;
+    }
+
+    .contact-item .value {
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      padding: 24px 0 54px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        grid-column: span 12;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        min-height: auto;
+        padding: 14px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .hero-card,
+      .hero-side,
+      .card-pad {
+        padding: 20px;
+      }
+
+      .mini-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#home" class="brand">
+        <span class="brand-mark">UH</span>
+        <span>Ung Heo</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <article class="panel hero-card fade-up">
+          <div>
+            <div class="eyebrow">Robotic Hardware · Experimental Systems · Portfolio</div>
+            <h1>
+              Building calm,
+              precise systems
+              for research.
+            </h1>
+            <p>
+              I design custom robotic and mechatronic hardware for experimental workflows.
+              My work spans wearable robotics, pneumatic systems, actuation, sensing, and
+              integrated research platforms that move from concept to validated prototype.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#projects">Selected Projects</a>
+              <a class="btn btn-secondary" href="#contact">Download CV</a>
+            </div>
+          </div>
+        </article>
+
+        <aside class="panel hero-side fade-up">
+          <div class="portrait">
+            <div class="portrait-badge">
+              Research hardware portfolio<br />
+              with projects, publications, and contact.
+            </div>
+          </div>
+          <div class="mini-grid">
+            <div class="mini-card">
+              <div class="label">Focus</div>
+              <div class="value">Custom hardware design</div>
+            </div>
+            <div class="mini-card">
+              <div class="label">Strength</div>
+              <div class="value">Rapid concept-to-prototype</div>
+            </div>
+            <div class="mini-card">
+              <div class="label">Domains</div>
+              <div class="value">Robotics · Fluids · Sensing</div>
+            </div>
+            <div class="mini-card">
+              <div class="label">Current goal</div>
+              <div class="value">Autonomous experimental systems</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div>
+            <h2>Selected Projects</h2>
+            <p>
+              A compact view of hardware systems, experimental platforms, and research-driven builds.
+              Replace placeholders with your photos, CAD captures, and short demo videos.
+            </p>
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          <article class="panel project-card fade-up">
+            <div class="project-media"></div>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="tag">Project 01</span>
+              </div>
+              <h3>Low-noise self-regulating pneumatic source</h3>
+              <p>
+                A custom thermofluidic pneumatic platform designed for robotic actuation,
+                integrating pressure generation, thermal coupling, and experimental validation.
+              </p>
+              <div class="project-meta">
+                <span class="meta-pill">Pneumatic hardware</span>
+                <span class="meta-pill">Experimental platform</span>
+                <span class="meta-pill">System integration</span>
+              </div>
+              <div class="project-links">
+                <a href="#">View project</a>
+                <a href="#">Related paper</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel project-card fade-up">
+            <div class="project-media"></div>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="tag">Project 02</span>
+              </div>
+              <h3>Bidirectional pressure source with thermal control</h3>
+              <p>
+                A hardware study on positive and negative pressure generation using a dual-chamber
+                configuration, thermoelectric coupling, and fluidic transfer concepts.
+              </p>
+              <div class="project-meta">
+                <span class="meta-pill">Actuation</span>
+                <span class="meta-pill">Thermal-fluid systems</span>
+                <span class="meta-pill">Prototype design</span>
+              </div>
+              <div class="project-links">
+                <a href="#">View project</a>
+                <a href="#">Test results</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel project-card fade-up">
+            <div class="project-media"></div>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="tag">Project 03</span>
+              </div>
+              <h3>Wearable robotic hardware and evaluation setups</h3>
+              <p>
+                End-to-end development of wearable robotic subsystems, from custom actuation hardware
+                and fixtures to repeatable evaluation platforms and sensor integration.
+              </p>
+              <div class="project-meta">
+                <span class="meta-pill">Wearable robotics</span>
+                <span class="meta-pill">Sensor integration</span>
+                <span class="meta-pill">Validation</span>
+              </div>
+              <div class="project-links">
+                <a href="#">View project</a>
+                <a href="#">Gallery</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel project-card fade-up">
+            <div class="project-media"></div>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="tag">Project 04</span>
+              </div>
+              <h3>Custom mechatronic testbeds for research automation</h3>
+              <p>
+                A collection of lab-built rigs for pumps, motors, sensors, data acquisition,
+                and iterative testing under realistic research constraints.
+              </p>
+              <div class="project-meta">
+                <span class="meta-pill">Mechatronics</span>
+                <span class="meta-pill">DAQ & control</span>
+                <span class="meta-pill">Rapid iteration</span>
+              </div>
+              <div class="project-links">
+                <a href="#">View project</a>
+                <a href="#">Hardware notes</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container split">
+        <article class="panel card-pad fade-up">
+          <div class="section-head" style="margin-bottom:14px;">
+            <div>
+              <h2>About</h2>
+              <p>
+                A concise narrative for recruiters, collaborators, and research teams.
+              </p>
+            </div>
+          </div>
+          <p style="margin-top:0; color: var(--muted);">
+            My background is centered on designing research hardware under real constraints:
+            tight form factors, custom actuation, fluidic and pneumatic components, sensor integration,
+            and experimental validation. Rather than staying within a single product category,
+            I have repeatedly built systems for new research needs and translated abstract ideas into
+            working prototypes.
+          </p>
+          <p style="margin-bottom:0; color: var(--muted);">
+            I am especially interested in the physical layer of autonomous experimentation:
+            reliable hardware, modular mechanisms, and custom robotic tools that make advanced
+            research workflows executable, repeatable, and scalable.
+          </p>
+        </article>
+
+        <aside class="panel card-pad fade-up">
+          <div class="section-head" style="margin-bottom:14px;">
+            <div>
+              <h2>Core Strengths</h2>
+              <p>What I want this portfolio to make immediately visible.</p>
+            </div>
+          </div>
+          <ul class="list">
+            <li>
+              <strong>Custom robotic and mechatronic hardware</strong>
+              <span>Concept design for new research tasks and experimental workflows.</span>
+            </li>
+            <li>
+              <strong>Actuation, fluidic, and pneumatic systems</strong>
+              <span>Hardware built around pressure, flow, thermal coupling, and control constraints.</span>
+            </li>
+            <li>
+              <strong>Prototype-driven experimental validation</strong>
+              <span>From design decisions to working rigs, characterization, and iteration.</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="publications">
+      <div class="container split">
+        <article class="panel card-pad fade-up">
+          <div class="section-head" style="margin-bottom:14px;">
+            <div>
+              <h2>Selected Publications</h2>
+              <p>Replace sample entries with your actual first-author papers and links.</p>
+            </div>
+          </div>
+          <ul class="list">
+            <li>
+              <strong>Soft Robotics · 2026</strong>
+              <span>Title placeholder for your recent first-author paper. Add DOI or PDF link here.</span>
+            </li>
+            <li>
+              <strong>IEEE/ASME TMECH · 2027</strong>
+              <span>Title placeholder for hardware or system-design paper.</span>
+            </li>
+            <li>
+              <strong>IEEE TNSRE · 2022</strong>
+              <span>Title placeholder for rehabilitation or robotics-related work.</span>
+            </li>
+          </ul>
+        </article>
+
+        <aside class="panel card-pad fade-up">
+          <div class="section-head" style="margin-bottom:14px;">
+            <div>
+              <h2>Experience Timeline</h2>
+              <p>A short timeline keeps the site structured without feeling crowded.</p>
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="panel timeline-item" style="box-shadow:none; background:rgba(255,255,255,.58);">
+              <div class="timeline-year">Now</div>
+              <div>
+                <h3>Postdoctoral Researcher</h3>
+                <p>Hardware-centric research spanning robotic systems, experimental platforms, and publications in preparation.</p>
+              </div>
+            </div>
+            <div class="panel timeline-item" style="box-shadow:none; background:rgba(255,255,255,.58);">
+              <div class="timeline-year">Ph.D.</div>
+              <div>
+                <h3>Research in robotics and custom hardware</h3>
+                <p>Built multiple mechatronic systems across actuation, sensing, and validation workflows.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <article class="panel card-pad contact-card fade-up">
+          <div class="section-head" style="margin-bottom:4px;">
+            <div>
+              <h2>Contact</h2>
+              <p>Keep this section simple and easy to scan. Add a downloadable CV link here.</p>
+            </div>
+          </div>
+
+          <div class="contact-grid">
+            <div class="contact-item">
+              <div class="label">Email</div>
+              <div class="value">your.email@example.com</div>
+            </div>
+            <div class="contact-item">
+              <div class="label">Location</div>
+              <div class="value">Seoul / Suwon / Korea</div>
+            </div>
+            <div class="contact-item">
+              <div class="label">Google Scholar</div>
+              <div class="value">Add your scholar link</div>
+            </div>
+            <div class="contact-item">
+              <div class="label">LinkedIn / GitHub</div>
+              <div class="value">Add your professional links</div>
+            </div>
+          </div>
+
+          <div class="hero-actions" style="margin-top: 4px;">
+            <a class="btn btn-primary" href="#">Download CV (PDF)</a>
+            <a class="btn btn-secondary" href="mailto:your.email@example.com">Get in touch</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Designed as a calm single-file portfolio for GitHub Pages. Replace placeholders with your own content, images, and links.
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const setActive = () => {
+      let currentId = 'home';
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 120 && rect.bottom >= 120) {
+          currentId = section.id;
+        }
+      });
+
+      navLinks.forEach((link) => {
+        const href = link.getAttribute('href')?.replace('#', '');
+        link.classList.toggle('active', href === currentId);
+      });
+    };
+
+    window.addEventListener('scroll', setActive, { passive: true });
+    window.addEventListener('load', setActive);
+  </script>
+</body>
+</html>
