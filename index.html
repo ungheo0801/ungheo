@@ -3,425 +3,491 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ung Heo | Portfolio</title>
+  <title>Ung Heo</title>
   <style>
     :root {
-      --bg: #f6f7f5;
-      --surface: rgba(255, 255, 255, 0.72);
-      --surface-strong: rgba(255, 255, 255, 0.9);
-      --text: #202525;
-      --muted: #5f6a68;
-      --line: rgba(32, 37, 37, 0.08);
-      --accent: #5d7a73;
-      --accent-soft: #d9e5e1;
-      --shadow: 0 10px 30px rgba(33, 42, 40, 0.08);
-      --radius-xl: 28px;
-      --radius-lg: 20px;
-      --radius-md: 14px;
+      --navy: #0d2a66;
+      --navy-deep: #091c46;
+      --blue: #2f73ff;
+      --sky: #e9f1ff;
+      --sky-2: #f5f8ff;
+      --bg: #f7f8fb;
+      --surface: #ffffff;
+      --text: #121722;
+      --muted: #667089;
+      --line: #e4e9f2;
       --max: 1120px;
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow: 0 14px 40px rgba(12, 28, 64, 0.06);
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
-      font-family: Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, Pretendard, "Noto Sans KR", Arial, sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(93, 122, 115, 0.12), transparent 24%),
-        radial-gradient(circle at 85% 15%, rgba(168, 188, 181, 0.18), transparent 20%),
-        linear-gradient(180deg, #fbfcfb 0%, var(--bg) 100%);
-      line-height: 1.6;
+      background: linear-gradient(180deg, #fbfcff 0%, var(--bg) 100%);
+      line-height: 1.7;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
 
     .container {
-      width: min(calc(100% - 32px), var(--max));
+      width: min(calc(100% - 40px), var(--max));
       margin: 0 auto;
     }
 
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(14px);
-      background: rgba(246, 247, 245, 0.72);
-      border-bottom: 1px solid rgba(32, 37, 37, 0.06);
+      z-index: 50;
+      background: rgba(255,255,255,0.84);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(13,42,102,0.07);
     }
 
     .nav {
+      min-height: 70px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      min-height: 72px;
-      gap: 16px;
+      gap: 18px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: -0.02em;
     }
 
     .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, var(--accent-soft), #edf3f1);
-      color: var(--accent);
-      font-size: 0.95rem;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: white;
+      font-size: 0.84rem;
+      box-shadow: 0 8px 18px rgba(47,115,255,0.18);
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.88rem;
+      display: block;
+      margin-top: 1px;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
-    .nav-links a {
-      padding: 10px 14px;
-      color: var(--muted);
+    .nav-links button {
+      padding: 8px 12px;
       border-radius: 999px;
-      transition: 180ms ease;
-      font-size: 0.95rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+      transition: 160ms ease;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.72);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    .nav-links button:hover,
+    .nav-links button.active {
+      color: var(--navy);
+      background: var(--sky);
     }
 
-    .hero {
-      padding: 68px 0 34px;
+    main { min-height: calc(100vh - 120px); }
+
+    .page {
+      display: none;
+      padding: 34px 0 56px;
+      animation: fadeIn 260ms ease;
     }
 
-    .hero-grid {
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-shell {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
-      gap: 28px;
+      gap: 22px;
       align-items: stretch;
     }
 
-    .panel {
+
+    .home-intro-card {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+      gap: 0;
+      overflow: hidden;
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
+      border-radius: 30px;
       box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
     }
 
-    .hero-card {
-      padding: 34px;
+    .home-profile-photo {
+      min-height: 520px;
+      background: linear-gradient(180deg, var(--sky) 0%, #dfeaff 100%);
+      overflow: hidden;
+    }
+
+    .home-profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .home-intro-body {
+      padding: 52px 56px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      min-height: 460px;
+      justify-content: center;
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
     }
 
-    .eyebrow {
+    .home-name {
+      margin: 0;
+      font-size: clamp(3rem, 6vw, 5.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+      word-spacing: 0.08em;
+      color: #121722;
+    }
+
+    .home-position {
+      margin-top: 18px;
+      color: var(--blue);
+      font-size: 1.22rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+
+    .home-bio {
+      margin: 22px 0 0;
+      max-width: 58ch;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+
+    .hero-main {
+      background: linear-gradient(145deg, var(--navy) 0%, #143983 58%, #17459f 100%);
+      border-radius: 30px;
+      padding: 42px;
+      color: white;
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(9,28,70,0.14);
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.13), rgba(255,255,255,0));
+      top: -80px;
+      right: -60px;
+    }
+
+    .hero-kicker,
+    .section-kicker {
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      margin-bottom: 10px;
+    }
+
+    .hero-kicker {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(93, 122, 115, 0.08);
-      color: var(--accent);
-      font-size: 0.88rem;
-      width: fit-content;
-      margin-bottom: 18px;
+      background: rgba(255,255,255,0.1);
+      color: #b8d6ff;
+      border: 1px solid rgba(255,255,255,0.12);
+      margin-bottom: 22px;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      font-size: clamp(2.7rem, 6vw, 4.8rem);
       line-height: 0.98;
-      letter-spacing: -0.05em;
-      font-weight: 700;
+      letter-spacing: -0.055em;
+      font-weight: 750;
+      position: relative;
+      z-index: 1;
     }
 
-    .hero-card p {
-      max-width: 58ch;
+    h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      letter-spacing: -0.045em;
+      color: #131826;
+    }
+
+    h3 {
+      margin: 0 0 14px;
+      font-size: 1.28rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-main p, .panel p, .section-head p, .project-body p, .timeline-item p {
       color: var(--muted);
-      font-size: 1.05rem;
-      margin: 22px 0 0;
+      font-size: 0.97rem;
     }
 
-    .hero-actions {
+    .hero-main p {
+      margin: 22px 0 0;
+      max-width: 58ch;
+      color: rgba(255,255,255,0.82);
+      font-size: 1.02rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-actions, .actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
+      gap: 10px;
+      margin-top: 24px;
+      position: relative;
+      z-index: 1;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      min-height: 48px;
-      padding: 0 18px;
+      min-height: 44px;
+      padding: 0 16px;
       border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.94rem;
       border: 1px solid transparent;
-      transition: 180ms ease;
-      font-weight: 600;
+      transition: 160ms ease;
     }
 
-    .btn-primary {
-      color: #fff;
-      background: linear-gradient(135deg, #5d7a73, #425954);
-      box-shadow: 0 10px 24px rgba(66, 89, 84, 0.2);
+    .btn-primary { background: white; color: var(--navy); }
+    .btn-primary:hover { background: #f1f6ff; }
+    .btn-secondary { background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.14); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.14); }
+    .btn-outline { color: var(--navy); background: #fff; border-color: var(--line); }
+    .btn-outline:hover { background: #fafcff; }
+
+    .btn-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 7px;
+      font-size: 0.88rem;
+      background: var(--sky);
+      color: var(--navy);
+      line-height: 1;
+      flex: 0 0 auto;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(66, 89, 84, 0.24);
+    .panel-title-with-icon {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
     }
 
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.76);
-      border-color: var(--line);
-      color: var(--text);
+    .section-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--sky), #ffffff);
+      border: 1px solid #dbe8ff;
+      color: var(--navy);
+      font-size: 1.15rem;
+      box-shadow: 0 8px 18px rgba(47,115,255,0.08);
+      flex: 0 0 auto;
     }
 
-    .btn-secondary:hover {
-      background: var(--surface-strong);
+    .panel-title-with-icon h3 {
+      margin: 0;
     }
+
 
     .hero-side {
-      padding: 24px;
       display: grid;
       gap: 16px;
       align-content: start;
     }
 
-    .portrait {
-      border-radius: 22px;
-      min-height: 260px;
-      background:
-        linear-gradient(160deg, rgba(93, 122, 115, 0.18), rgba(255,255,255,0.75)),
-        linear-gradient(135deg, #eef3f1, #dde5e2);
-      display: flex;
-      align-items: end;
-      justify-content: start;
-      overflow: hidden;
-      position: relative;
-      padding: 22px;
-    }
-
-    .portrait::after {
-      content: "Replace with portrait or lab photo";
-      position: absolute;
-      inset: auto 18px 18px auto;
-      font-size: 0.82rem;
-      color: rgba(32,37,37,0.45);
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(32,37,37,0.06);
-    }
-
-    .portrait-badge {
-      position: relative;
-      z-index: 1;
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(32,37,37,0.06);
-      font-size: 0.95rem;
-      backdrop-filter: blur(8px);
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .mini-card {
-      padding: 18px;
-      background: rgba(255,255,255,0.72);
+    .profile-card,
+    .mini-card,
+    .panel,
+    .project-card,
+    .pub-item,
+    .research-topic {
+      background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
     }
 
-    .mini-card .label {
-      color: var(--muted);
-      font-size: 0.86rem;
-      margin-bottom: 8px;
-    }
+    .profile-card, .panel { padding: 20px; }
 
-    .mini-card .value {
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    section {
-      padding: 28px 0;
-    }
-
-    .section-head {
+    .profile-media {
+      min-height: 230px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, var(--sky) 0%, #dce9ff 100%);
+      position: relative;
+      overflow: hidden;
       display: flex;
       align-items: end;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 18px;
+      padding: 18px;
     }
 
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(1.5rem, 2vw, 2rem);
-      letter-spacing: -0.04em;
-    }
-
-    .section-head p {
-      margin: 8px 0 0;
-      color: var(--muted);
-      max-width: 52ch;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 18px;
-    }
-
-    .project-card {
-      grid-column: span 6;
-      overflow: hidden;
-    }
-
-    .project-media {
-      aspect-ratio: 16 / 10;
-      background:
-        linear-gradient(150deg, rgba(93, 122, 115, 0.2), rgba(255,255,255,0.5)),
-        linear-gradient(135deg, #e9efed, #d7e1dd);
-      border-bottom: 1px solid var(--line);
-      position: relative;
-    }
-
-    .project-media::before {
-      content: "Image / CAD / Video thumbnail";
+    .profile-media::after,
+    .project-media::after {
+      content: "Add image / CAD / video thumbnail";
       position: absolute;
-      left: 18px;
-      bottom: 18px;
-      color: rgba(32,37,37,0.5);
-      font-size: 0.9rem;
-      padding: 8px 10px;
+      left: 14px;
+      bottom: 14px;
+      font-size: 0.8rem;
+      color: #4e6895;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(48,77,132,0.08);
       border-radius: 999px;
-      background: rgba(255,255,255,0.74);
-      border: 1px solid rgba(32,37,37,0.06);
+      padding: 6px 10px;
     }
 
-    .project-body {
-      padding: 22px;
+    .profile-badge {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(69,96,141,0.10);
+      font-size: 0.92rem;
+      color: #213256;
+      max-width: 220px;
     }
 
-    .project-top {
+    .mini-grid { display: grid; gap: 12px; }
+    .mini-card { padding: 15px 16px; background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%); }
+    .mini-card .label, .contact-item .label { color: var(--muted); font-size: 0.81rem; margin-bottom: 4px; }
+    .mini-card .value, .contact-item .value { font-size: 0.97rem; font-weight: 700; letter-spacing: -0.02em; }
+
+    .section-head { margin-bottom: 20px; }
+    .section-head p { margin: 10px 0 0; max-width: 62ch; }
+
+    .quick-grid, .cards, .research-grid, .project-grid, .pub-grid, .contact-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .quick-grid { grid-template-columns: repeat(3, 1fr); margin-top: 18px; }
+    .cards { grid-template-columns: repeat(12, 1fr); }
+    .research-grid { grid-template-columns: repeat(3, 1fr); }
+    .project-grid, .pub-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: repeat(2, 1fr); margin-top: 18px; }
+
+    .quick-item {
+      padding: 18px;
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .quick-item h4 { margin: 0 0 8px; font-size: 1rem; }
+    .quick-item p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+
+    .project-card { grid-column: span 4; overflow: hidden; }
+    .project-media, .research-top {
+      background: linear-gradient(180deg, var(--sky) 0%, #dfeaff 100%);
+      min-height: 170px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 10px;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #304d84;
+      position: relative;
     }
 
-    .tag {
+    .project-body, .research-body { padding: 20px; }
+
+    .project-tag, .topic-tag {
       display: inline-flex;
       align-items: center;
-      padding: 7px 10px;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--blue);
+      background: #eff5ff;
+      border: 1px solid #dbe8ff;
       border-radius: 999px;
-      background: rgba(93,122,115,0.08);
-      color: var(--accent);
-      font-size: 0.82rem;
-      font-weight: 600;
     }
 
-    .project-body h3 {
-      margin: 0 0 10px;
-      font-size: 1.2rem;
-      letter-spacing: -0.03em;
-    }
+    .project-body h3, .research-body h3 { margin: 0 0 10px; font-size: 1.18rem; line-height: 1.35; }
+    .project-body p, .research-body p { margin: 0 0 14px; }
 
-    .project-body p {
-      margin: 0 0 18px;
-      color: var(--muted);
-    }
-
-    .project-meta {
+    .pill-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
-    .meta-pill {
-      padding: 7px 10px;
+    .pill {
+      font-size: 0.78rem;
+      color: #3d5ea3;
+      background: #f3f7ff;
+      border: 1px solid #dde8ff;
       border-radius: 999px;
-      background: rgba(32,37,37,0.04);
-      color: #43504d;
-      font-size: 0.82rem;
+      padding: 5px 10px;
+      font-weight: 700;
     }
 
-    .project-links {
+    .project-links, .inline-links {
       display: flex;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
-    .project-links a {
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.94rem;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 14px;
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 18px;
-      padding: 20px 22px;
-    }
-
-    .timeline-year {
-      color: var(--accent);
+    .project-links a, .inline-links a, .contact-item a {
+      color: var(--blue);
       font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: -0.02em;
+      font-size: 0.92rem;
     }
 
-    .timeline-item h3 {
-      margin: 0 0 6px;
-      font-size: 1.06rem;
-      letter-spacing: -0.03em;
-    }
-
-    .timeline-item p {
-      margin: 0;
-      color: var(--muted);
-    }
+    .project-links a:hover, .inline-links a:hover, .contact-item a:hover { text-decoration: underline; }
 
     .split {
       display: grid;
@@ -429,91 +495,888 @@
       gap: 18px;
     }
 
-    .card-pad {
-      padding: 24px;
-    }
-
     .list {
-      display: grid;
-      gap: 14px;
+      list-style: none;
       margin: 0;
       padding: 0;
-      list-style: none;
+      display: grid;
+      gap: 12px;
     }
 
-    .list li {
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.62);
+    .list li, .contact-item, .pub-item {
       border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
     }
 
-    .list strong {
+    .list strong, .pub-title {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+      font-size: 0.98rem;
       letter-spacing: -0.02em;
     }
 
-    .list span {
-      color: var(--muted);
-      font-size: 0.96rem;
+    .list span, .pub-meta { color: var(--muted); font-size: 0.94rem; }
+
+    .timeline { display: grid; gap: 12px; }
+    .timeline-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 14px;
+    }
+    .timeline-year { color: var(--blue); font-weight: 700; font-size: 0.92rem; }
+    .timeline-item h4 { margin: 0 0 4px; font-size: 1rem; letter-spacing: -0.02em; }
+    .timeline-item p { margin: 0; }
+
+    .research-topic {
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+    .research-topic:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 38px rgba(12, 28, 64, 0.10);
+    }
+    .research-content {
+      display: block;
+    }
+    .research-top {
+      min-height: 150px;
+      font-size: 2.3rem;
+    }
+    .research-body {
+      padding: 16px 18px 18px;
+    }
+    .research-body h3 {
+      margin: 0;
+      font-size: 1.06rem;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+    }
+    .topic-tag,
+    .research-body p,
+    .topic-list {
+      display: none;
     }
 
-    .contact-card {
+    .project-grid .project-card { grid-column: span 12; }
+    .project-grid .project-content {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      min-height: 240px;
+    }
+
+    .project-grid .project-content.no-media {
+      grid-template-columns: 1fr;
+    }
+
+    .project-media {
+      min-height: 240px;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--sky-2) 0%, var(--sky) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+
+    .project-media::after { display: none; }
+
+    .project-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .project-media.project-media-fit img {
+      object-fit: contain;
+    }
+
+    .project-media.project-media-slight-shrink img {
+      width: 92%;
+      height: 92%;
+      object-fit: contain;
+    }
+
+    .project-tag {
+      width: fit-content;
+      align-self: flex-start;
+    }
+
+    .project-role-pills {
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .project-role-pills .project-role {
+      margin: 0 0 14px;
+    }
+
+    .project-role-pills .pill-row {
+      margin: 0;
+    }
+
+    .project-content.lower-limb-project {
+      grid-template-columns: minmax(220px, 0.58fr) minmax(0, 1.42fr);
+      min-height: 0;
+      align-items: stretch;
+    }
+
+    .project-content.lower-limb-project .project-media {
+      min-height: 185px;
+      padding: 14px;
+    }
+
+    .project-content.lower-limb-project .project-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .project-content.lower-limb-project .project-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+
+    .project-body .project-date {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .project-body .project-role {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .pub-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 18px;
+    }
+
+    .pub-type {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--blue);
+      background: #eff5ff;
+      border: 1px solid #dbe8ff;
+      border-radius: 999px;
+      padding: 5px 10px;
+      white-space: nowrap;
+    }
+
+
+    
+    .compact-theme-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 16px 16px 0;
+    }
+
+    .theme-number-top {
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .thumbnail-top {
+      overflow: hidden;
+      min-height: 190px;
+      padding: 0;
+      align-items: stretch;
+      justify-content: stretch;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .theme-thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .compact-theme-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6px 20px 18px;
+      gap: 0;
+    }
+
+    .compact-theme-body h3 {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    .theme-number {
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      opacity: 0.9;
+    }
+
+
+    .research-topic.is-clickable {
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .research-topic.is-clickable:hover {
+      transform: translateY(-3px);
+      border-color: #cfdcf6;
+      box-shadow: 0 20px 44px rgba(12, 28, 64, 0.10);
+    }
+
+    .detail-page-shell {
+      display: grid;
+      gap: 24px;
+    }
+
+    .detail-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.94rem;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    .detail-back:hover { text-decoration: underline; }
+
+    .detail-hero {
+      display: grid;
+      gap: 12px;
+    }
+
+    .detail-hero p {
+      max-width: 74ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .bse-video-stack {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .video-card, .image-summary-card, .related-pubs-card, .detail-summary-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .video-placeholder {
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(180deg, var(--sky) 0%, #dfeaff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #304d84;
+      font-size: 2.2rem;
+      position: relative;
+    }
+
+    .video-placeholder::after {
+      content: "Embed video / demo here";
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      font-size: 0.8rem;
+      color: #4e6895;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(48,77,132,0.08);
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+
+    .video-caption {
+      padding: 14px 16px 16px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .video-embed {
+      width: 100%;
+      display: block;
+      background: #000;
+      object-fit: contain;
+    }
+
+
+    .image-summary-card {
+      display: block;
+    }
+
+    .bse-image-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .image-placeholder {
+      min-height: 340px;
+      background: linear-gradient(180deg, var(--sky-2) 0%, var(--sky) 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+
+    .image-placeholder img {
+      width: 100%;
+      max-height: 760px;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .image-placeholder::after {
+      content: "BSE_Fig1.jpg";
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      font-size: 0.8rem;
+      color: #4e6895;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(48,77,132,0.08);
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+
+    .summary-box {
+      padding: 20px 22px;
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+      border-left: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .summary-box h3 {
+      margin-bottom: 10px;
+    }
+
+    .summary-box p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .detail-summary-card {
+      padding: 20px 22px;
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+    }
+
+    .detail-summary-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .summary-points {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .summary-points li { margin-bottom: 8px; }
+
+    .related-pubs-card {
+      padding: 20px;
+    }
+
+    .related-pubs-card h3 {
+      margin-bottom: 14px;
+    }
+
+    .related-pubs-list {
+      margin: 0;
+      padding-left: 22px;
+      color: var(--muted);
+    }
+
+    .related-pubs-list li {
+      margin-bottom: 10px;
+      padding-left: 4px;
+    }
+
+    .related-pubs-list a {
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .related-pubs-list a:hover {
+      text-decoration: underline;
+    }
+
+
+    .detail-media-stack {
       display: grid;
       gap: 18px;
     }
 
-    .contact-grid {
+    .detail-media-row {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      grid-template-columns: minmax(280px, 0.62fr) minmax(0, 1.38fr);
+      gap: 18px;
+      align-items: stretch;
     }
 
-    .contact-item {
-      padding: 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.68);
+    .detail-media-cell.video-side {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-media-cell.video-side .video-embed {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      max-width: none;
+      max-height: none;
+      margin: 0;
+      border-radius: 0;
+      object-fit: cover;
+      background: #000;
+      flex: 1 1 auto;
+    }
+
+    .detail-media-cell.video-side .video-caption {
+      margin-top: auto;
+    }
+
+    .figure-summary-side {
+      display: grid;
+      grid-template-rows: auto auto;
+    }
+
+    .figure-summary-side .image-placeholder {
+      min-height: 260px;
+      padding: 10px;
+      align-items: center;
+    }
+
+    .figure-summary-side .image-placeholder img {
+      width: 100%;
+      height: auto;
+      max-height: 340px;
+      object-fit: contain;
+      display: block;
+      background: #fff;
+      padding: 0;
+    }
+
+    .figure-summary-side .image-placeholder::after {
+      display: none;
+    }
+
+    .inline-summary {
+      padding: 16px 20px 18px;
+      border-top: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+    }
+
+    .inline-summary h3 {
+      margin: 0 0 10px;
+      font-size: 1.12rem;
+    }
+
+    .inline-summary .summary-points {
+      margin: 0;
+    }
+
+    .detail-media-row.square-video-layout {
+      grid-template-columns: minmax(380px, 0.95fr) minmax(0, 1.05fr);
+    }
+
+    .detail-media-row.square-video-layout .detail-media-cell.video-side .video-embed {
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      aspect-ratio: 1 / 1;
+      margin: 0;
+      border-radius: 0;
+      object-fit: cover;
+      flex: 1 1 auto;
+    }
+
+    .detail-media-row.square-video-layout .detail-media-cell.video-side {
+      justify-content: stretch;
+    }
+
+    .detail-media-row.square-video-layout .figure-summary-side .image-placeholder {
+      min-height: 220px;
+    }
+
+    .detail-media-row.square-video-layout .figure-summary-side .image-placeholder img {
+      max-height: 280px;
+    }
+
+    .detail-media-cell {
+      background: var(--surface);
       border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    .contact-item .label {
+    .detail-media-cell .video-placeholder,
+    .detail-media-cell .image-placeholder {
+      min-height: 320px;
+      height: 100%;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+      background: linear-gradient(180deg, var(--sky) 0%, #dfeaff 100%);
+    }
+
+    .detail-media-cell .image-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #fff;
+      padding: 10px;
+    }
+
+    .detail-media-cell .video-caption {
+      padding: 12px 16px 14px;
+      font-size: 0.9rem;
       color: var(--muted);
-      font-size: 0.84rem;
-      margin-bottom: 6px;
+      border-top: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
     }
 
-    .contact-item .value {
-      font-weight: 600;
-      overflow-wrap: anywhere;
+
+    /* Pneumatic source 1: slightly smaller, tighter video card */
+    .detail-media-row:not(.square-video-layout) {
+      grid-template-columns: minmax(260px, 0.54fr) minmax(0, 1.46fr);
+      align-items: start;
+    }
+
+    .detail-media-row:not(.square-video-layout) .detail-media-cell.video-side {
+      align-self: start;
+    }
+
+    .detail-media-row:not(.square-video-layout) .detail-media-cell.video-side .video-embed {
+      height: 470px;
+      max-height: 470px;
+      object-fit: cover;
+    }
+
+
+
+    /* Pneumatic source 1: reduce/crop the figure area so the right card aligns with the video card */
+    .detail-media-row:not(.square-video-layout) .figure-summary-side .image-placeholder {
+      min-height: 284px;
+      height: 284px;
+      padding: 0;
+      overflow: hidden;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .detail-media-row:not(.square-video-layout) .figure-summary-side .image-placeholder img {
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      object-fit: cover;
+      object-position: center;
+      padding: 0;
+    }
+
+
+    .hmi-media-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hmi-primary-video .video-embed {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      background: #000;
+    }
+
+    .hmi-second-row {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .hmi-second-row .video-card,
+    .hmi-second-row .image-summary-card {
+      height: 100%;
+    }
+
+    .hmi-secondary-video .video-embed {
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+      object-fit: contain;
+      display: block;
+      background: #000;
+      padding: 10px;
+    }
+
+    .hmi-figure {
+      min-height: 300px;
+      height: 100%;
+      padding: 12px;
+    }
+
+    .hmi-figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 10px;
+    }
+
+    .hmi-figure::after {
+      display: none;
+    }
+
+
+    .research-overview {
+      margin-top: 24px;
+      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .research-overview h3 {
+      margin: 0 0 14px;
+      font-size: 1.24rem;
+      letter-spacing: -0.03em;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .overview-item {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+    }
+
+    .overview-item h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .overview-item p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    .overview-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .overview-link:hover { text-decoration: underline; }
+
+
+    .theme-overview {
+      padding: 14px 18px 18px;
+      border-top: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+    }
+
+    .theme-overview-label {
+      margin: 0 0 6px;
+      color: var(--blue);
+      font-size: 0.76rem;
+      font-weight: 750;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    .theme-overview p {
+      display: block;
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      text-align: left;
+    }
+
+    .theme-overview .overview-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .compact-themes .research-topic {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .compact-themes .research-content {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .compact-themes .thumbnail-top {
+      flex: 1 1 auto;
+    }
+
+    .home-history {
+      align-items: stretch;
+    }
+
+    .home-history > .panel {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .home-history > .panel .timeline {
+      flex: 1 1 auto;
+    }
+
+    .home-history > .panel:first-child .timeline {
+      grid-template-rows: auto 1fr;
+    }
+
+    .home-history > .panel:first-child .timeline .timeline-item:last-child {
+      height: 100%;
+    }
+
+
+
+    /* Research tab visual refinement */
+    #page-research .section-head {
+      margin-bottom: 28px;
+    }
+
+    #page-research .compact-themes {
+      margin-top: 30px;
+    }
+
+    #page-research .compact-themes .research-topic {
+      min-height: 500px;
+    }
+
+    #page-research .theme-number-top {
+      font-size: 0.84rem;
+      margin-bottom: 10px;
+    }
+
+    #page-research .compact-theme-body {
+      padding: 8px 22px 20px;
+    }
+
+    #page-research .compact-theme-body h3 {
+      font-size: 1.18rem;
+      line-height: 1.35;
+    }
+
+    #page-research .theme-overview {
+      padding: 18px 24px 22px;
+    }
+
+    #page-research .theme-overview-title {
+      font-size: 0.84rem;
+      margin-bottom: 10px;
+    }
+
+    #page-research .theme-overview p {
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    #page-research .theme-overview .overview-link {
+      font-size: 0.94rem;
+      margin-top: 8px;
+    }
+
+
+    .bse-image-summary .image-placeholder::after {
+      display: none;
     }
 
     footer {
-      padding: 24px 0 54px;
+      padding: 20px 0 44px;
       color: var(--muted);
       font-size: 0.92rem;
     }
 
     .fade-up {
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 600ms ease, transform 600ms ease;
+      transform: translateY(10px);
+      transition: opacity 420ms ease, transform 420ms ease;
     }
 
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 960px) {
-      .hero-grid,
-      .split {
-        grid-template-columns: 1fr;
-      }
-
-      .project-card {
-        grid-column: span 12;
-      }
+    @media (max-width: 980px) {
+      .hero-shell, .split, .research-content, .project-grid .project-content, .bse-image-summary, .home-intro-card { grid-template-columns: 1fr; }
+      .home-profile-photo { min-height: 420px; }
+      .home-intro-body { padding: 36px 28px; }
+      .project-card { grid-column: span 6; }
+      .quick-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 720px) {
@@ -523,176 +1386,166 @@
         align-items: flex-start;
         flex-direction: column;
       }
-
-      .hero {
-        padding-top: 34px;
-      }
-
-      .hero-card,
-      .hero-side,
-      .card-pad {
-        padding: 20px;
-      }
-
-      .mini-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline-item {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
+      .project-card { grid-column: span 12; }
+      .timeline-item { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .summary-box { border-left: none; border-top: 1px solid var(--line); }
+      .hero-main { padding: 30px 24px; min-height: auto; }
+      .page { padding-top: 24px; }
+      .nav-links { gap: 10px; }
+      .pub-item { flex-direction: column; }
+      .hmi-second-row { grid-template-columns: 1fr; }
+      .home-profile-photo { min-height: 360px; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a href="#home" class="brand">
+      <a href="#" class="brand" data-page-link="home">
         <span class="brand-mark">UH</span>
-        <span>Ung Heo</span>
+        <div>
+          <div>Ung Heo</div>
+        </div>
       </a>
       <nav class="nav-links">
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#publications">Publications</a>
-        <a href="#contact">Contact</a>
+        <button class="active" data-page="home">Home</button>
+        <button data-page="research">Research</button>
+        <button data-page="projects">Projects</button>
+        <button data-page="publications">Publications</button>
       </nav>
     </div>
   </header>
 
-  <main id="home">
-    <section class="hero">
-      <div class="container hero-grid">
-        <article class="panel hero-card fade-up">
-          <div>
-            <div class="eyebrow">Robotic Hardware · Experimental Systems · Portfolio</div>
-            <h1>
-              Building calm,
-              precise systems
-              for research.
-            </h1>
-            <p>
-              I design custom robotic and mechatronic hardware for experimental workflows.
-              My work spans wearable robotics, pneumatic systems, actuation, sensing, and
-              integrated research platforms that move from concept to validated prototype.
+  <main>
+    <section class="page active" id="page-home">
+      <div class="container">
+        <article class="home-intro-card fade-up">
+          <div class="home-profile-photo">
+            <img src="assets/images/Profile.jpg" alt="Profile photo of Ung Heo" />
+          </div>
+          <div class="home-intro-body">
+            <h1 class="home-name">Ung Heo</h1>
+            <div class="home-position">Postdoc @ KIST Bionics Research Center</div>
+            <p class="home-bio">
+              I am a robotics engineer focusing on human-assistive robotic systems, power sources for robotic actuation,
+              and human–machine interfaces. I develop integrated robotic platforms by combining mechanical design,
+              actuation systems, sensing, and experimental evaluation.
             </p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#projects">Selected Projects</a>
-              <a class="btn btn-secondary" href="#contact">Download CV</a>
+              <a class="btn btn-outline" href="https://scholar.google.co.kr/citations?user=jZIw4DkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer"><span class="btn-icon" aria-hidden="true">🎓</span>Google Scholar</a>
+              <a class="btn btn-outline" href="mailto:ungheo@kist.re.kr"><span class="btn-icon" aria-hidden="true">✉</span>Email</a>
+              <a class="btn btn-outline" href="assets/CV_UngHeo.pdf" download="CV_UngHeo.pdf"><span class="btn-icon" aria-hidden="true">↓</span>CV</a>
+              <a class="btn btn-outline" href="https://www.linkedin.com/in/heo-ung-1a6047342/" target="_blank" rel="noopener noreferrer"><span class="btn-icon" aria-hidden="true">in</span>LinkedIn</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="container split home-history" style="margin-top: 30px;">
+        <article class="panel fade-up">
+          <h3>Professional Experience</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">Jul. 2025–Present</div>
+              <div>
+                <h4>Postdoc, Bionics Research Center, Korea Institute of Science and Technology (KIST)</h4>
+                <p>Research on robotic hardware, pneumatic actuation systems, wearable assistive robotics, and human–machine interfaces.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">Mar. 2025–Jun. 2025</div>
+              <div>
+                <h4>Postdoc, Mechanical Engineering Research Institute, Korea Advanced Institute of Science and Technology (KAIST)</h4>
+                <p>Continued research on human-assistive robotic systems, pneumatic power sources, and experimental validation platforms.</p>
+              </div>
             </div>
           </div>
         </article>
 
-        <aside class="panel hero-side fade-up">
-          <div class="portrait">
-            <div class="portrait-badge">
-              Research hardware portfolio<br />
-              with projects, publications, and contact.
+        <aside class="panel fade-up">
+          <h3>Education</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">2025</div>
+              <div>
+                <h4>Ph.D. in Mechanical Engineering, KAIST</h4>
+                <p>Dissertation research on chemical reaction-based mobile pneumatic sources for wearable robots.</p>
+              </div>
             </div>
-          </div>
-          <div class="mini-grid">
-            <div class="mini-card">
-              <div class="label">Focus</div>
-              <div class="value">Custom hardware design</div>
+            <div class="timeline-item">
+              <div class="timeline-year">2020</div>
+              <div>
+                <h4>M.S. in Mechanical Engineering, KAIST</h4>
+                <p>Research on portable pneumatic back support exoskeletons and assistive strategies for lifting assistance.</p>
+              </div>
             </div>
-            <div class="mini-card">
-              <div class="label">Strength</div>
-              <div class="value">Rapid concept-to-prototype</div>
-            </div>
-            <div class="mini-card">
-              <div class="label">Domains</div>
-              <div class="value">Robotics · Fluids · Sensing</div>
-            </div>
-            <div class="mini-card">
-              <div class="label">Current goal</div>
-              <div class="value">Autonomous experimental systems</div>
+            <div class="timeline-item">
+              <div class="timeline-year">2018</div>
+              <div>
+                <h4>B.S. in Mechanical Engineering, KAIST</h4>
+                <p>Undergraduate training in mechanical engineering with a foundation in robotics and mechatronic systems.</p>
+              </div>
             </div>
           </div>
         </aside>
       </div>
     </section>
 
-    <section id="projects">
+    <section class="page" id="page-research">
       <div class="container">
         <div class="section-head fade-up">
-          <div>
-            <h2>Selected Projects</h2>
-            <p>
-              A compact view of hardware systems, experimental platforms, and research-driven builds.
-              Replace placeholders with your photos, CAD captures, and short demo videos.
-            </p>
-          </div>
+                    <h2>Research</h2>
         </div>
 
-        <div class="projects-grid">
-          <article class="panel project-card fade-up">
-            <div class="project-media"></div>
-            <div class="project-body">
-              <div class="project-top">
-                <span class="tag">Project 01</span>
+        <div class="research-grid compact-themes">
+          <article class="research-topic fade-up is-clickable" data-page-link="research-back-support">
+            <div class="research-content compact-theme-content">
+              <div class="theme-number-top">Theme 01</div>
+              <div class="research-body compact-theme-body compact-theme-title">
+                <h3>Human-assistive robotic systems</h3>
               </div>
-              <h3>Low-noise self-regulating pneumatic source</h3>
-              <p>
-                A custom thermofluidic pneumatic platform designed for robotic actuation,
-                integrating pressure generation, thermal coupling, and experimental validation.
-              </p>
-              <div class="project-meta">
-                <span class="meta-pill">Pneumatic hardware</span>
-                <span class="meta-pill">Experimental platform</span>
-                <span class="meta-pill">System integration</span>
+              <div class="research-top thumbnail-top">
+                <img src="assets/images/Thumbnail_Research_1.jpg" alt="Human-assistive robotic systems thumbnail" class="theme-thumbnail" />
               </div>
-              <div class="project-links">
-                <a href="#">View project</a>
-                <a href="#">Related paper</a>
+              <div class="theme-overview">
+                <div class="theme-overview-label">Research Overview</div>
+                <p>Development of wearable robotic platforms and pneumatic assistance mechanisms for human-centered physical support.</p>
+                <a href="#" class="overview-link" data-page-link="research-back-support">View details →</a>
               </div>
             </div>
           </article>
 
-
-          <article class="panel project-card fade-up">
-            <div class="project-media"></div>
-            <div class="project-body">
-              <div class="project-top">
-                <span class="tag">Project 02</span>
+          <article class="research-topic fade-up is-clickable" data-page-link="research-pneumatic-power">
+            <div class="research-content compact-theme-content">
+              <div class="theme-number-top">Theme 02</div>
+              <div class="research-body compact-theme-body compact-theme-title">
+                <h3>Power sources for robotic actuation</h3>
               </div>
-              <h3>Wearable robotic hardware and evaluation setups</h3>
-              <p>
-                End-to-end development of wearable robotic subsystems, from custom actuation hardware
-                and fixtures to repeatable evaluation platforms and sensor integration.
-              </p>
-              <div class="project-meta">
-                <span class="meta-pill">Wearable robotics</span>
-                <span class="meta-pill">Sensor integration</span>
-                <span class="meta-pill">Validation</span>
+              <div class="research-top thumbnail-top">
+                <img src="assets/images/Thumbnail_Research_2.jpg" alt="Power sources for robotic actuation thumbnail" class="theme-thumbnail" />
               </div>
-              <div class="project-links">
-                <a href="#">View project</a>
-                <a href="#">Gallery</a>
+              <div class="theme-overview">
+                <div class="theme-overview-label">Research Overview</div>
+                <p>Design and experimental validation of compact power sources for pneumatically driven robotic applications.</p>
+                <a href="#" class="overview-link" data-page-link="research-pneumatic-power">View details →</a>
               </div>
             </div>
           </article>
 
-          <article class="panel project-card fade-up">
-            <div class="project-media"></div>
-            <div class="project-body">
-              <div class="project-top">
-                <span class="tag">Project 03</span>
+          <article class="research-topic fade-up is-clickable" data-page-link="research-hmi">
+            <div class="research-content compact-theme-content">
+              <div class="theme-number-top">Theme 03</div>
+              <div class="research-body compact-theme-body compact-theme-title">
+                <h3>Human–machine interfaces</h3>
               </div>
-              <h3>Custom mechatronic testbeds for research automation</h3>
-              <p>
-                A collection of lab-built rigs for pumps, motors, sensors, data acquisition,
-                and iterative testing under realistic research constraints.
-              </p>
-              <div class="project-meta">
-                <span class="meta-pill">Mechatronics</span>
-                <span class="meta-pill">DAQ & control</span>
-                <span class="meta-pill">Rapid iteration</span>
+              <div class="research-top thumbnail-top">
+                <img src="assets/images/Thumbnail_Research_3.jpg" alt="Human–machine interfaces thumbnail" class="theme-thumbnail" />
               </div>
-              <div class="project-links">
-                <a href="#">View project</a>
-                <a href="#">Hardware notes</a>
+              <div class="theme-overview">
+                <div class="theme-overview-label">Research Overview</div>
+                <p>Integration of bioimpedance and surface electromyography sensing for motion estimation and real-time robotic system control.</p>
+                <a href="#" class="overview-link" data-page-link="research-hmi">View details →</a>
               </div>
             </div>
           </article>
@@ -700,183 +1553,466 @@
       </div>
     </section>
 
-    <section id="about">
-      <div class="container split">
-        <article class="panel card-pad fade-up">
-          <div class="section-head" style="margin-bottom:14px;">
-            <div>
-              <h2>About</h2>
-              <p>
-                A concise narrative for recruiters, collaborators, and research teams.
-              </p>
-            </div>
+    
+    
+    <section class="page" id="page-research-back-support">
+      <div class="container detail-page-shell">
+        <a href="#" class="detail-back" data-page-link="research">← Back to Research</a>
+
+        <div class="detail-hero fade-up">
+          <div class="section-kicker">Theme 01</div>
+          <h2>Back support exoskeleton</h2>
+        </div>
+
+        <div class="bse-video-stack">
+          <article class="video-card fade-up">
+            <video class="video-embed" controls playsinline preload="metadata">
+              <source src="assets/videos/Video_BSE.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="video-caption">Demo video 1 · hardware overview</div>
+          </article>
+
+          <article class="video-card fade-up">
+            <video class="video-embed" controls playsinline preload="metadata">
+              <source src="assets/videos/Video_BSE2.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="video-caption">Demo video 2 · sEMG-based assistive strategy</div>
+          </article>
+        </div>
+
+        <article class="image-summary-card bse-image-summary fade-up">
+          <div class="image-placeholder"><img src="assets/images/BSE_Fig1.jpg" alt="Back support exoskeleton figure" /></div>
+          <div class="summary-box">
+            <h3>Summary</h3>
+            <ul class="summary-points">
+              <li>A fully portable, microcompressor-based pneumatic back support exoskeleton was developed for lifting assistance.</li>
+              <li>The exoskeleton provides high assistive torque while maintaining high backdrivability.</li>
+              <li>An sEMG-triggered fast-assistance strategy reduced back muscle fatigue compared with a conventional approach.</li>
+            </ul>
           </div>
-          <p style="margin-top:0; color: var(--muted);">
-            My background is centered on designing research hardware under real constraints:
-            tight form factors, custom actuation, fluidic and pneumatic components, sensor integration,
-            and experimental validation. Rather than staying within a single product category,
-            I have repeatedly built systems for new research needs and translated abstract ideas into
-            working prototypes.
-          </p>
-          <p style="margin-bottom:0; color: var(--muted);">
-            I am especially interested in the physical layer of autonomous experimentation:
-            reliable hardware, modular mechanisms, and custom robotic tools that make advanced
-            research workflows executable, repeatable, and scalable.
-          </p>
         </article>
 
-        <aside class="panel card-pad fade-up">
-          <div class="section-head" style="margin-bottom:14px;">
-            <div>
-              <h2>Core Strengths</h2>
-              <p>What I want this portfolio to make immediately visible.</p>
-            </div>
-          </div>
-          <ul class="list">
-            <li>
-              <strong>Custom robotic and mechatronic hardware</strong>
-              <span>Concept design for new research tasks and experimental workflows.</span>
-            </li>
-            <li>
-              <strong>Actuation, fluidic, and pneumatic systems</strong>
-              <span>Hardware built around pressure, flow, thermal coupling, and control constraints.</span>
-            </li>
-            <li>
-              <strong>Prototype-driven experimental validation</strong>
-              <span>From design decisions to working rigs, characterization, and iteration.</span>
-            </li>
+        <article class="related-pubs-card fade-up">
+          <h3>Related publications</h3>
+          <ul class="related-pubs-list">
+            <li><a href="https://www.science.org/doi/full/10.1126/sciadv.adk5260" target="_blank" rel="noopener noreferrer">Skin preparation–free, stretchable microneedle adhesive patches for reliable electrophysiological sensing and exoskeleton robot control.</a> <em>Science Advances</em>, 2024.</li>
+            <li><a href="https://ieeexplore.ieee.org/abstract/document/9849510" target="_blank" rel="noopener noreferrer">sEMG-triggered fast assistance strategy for a pneumatic back support exoskeleton.</a> <em>IEEE Transactions on Neural Systems and Rehabilitation Engineering</em>, 2022.</li>
+            <li><a href="https://ieeexplore.ieee.org/abstract/document/8968581" target="_blank" rel="noopener noreferrer">Backdrivable and fully-portable pneumatic back support exoskeleton for lifting assistance.</a> <em>IEEE Robotics and Automation Letters</em>, 2020.</li>
           </ul>
-        </aside>
+        </article>
       </div>
     </section>
 
-    <section id="publications">
-      <div class="container split">
-        <article class="panel card-pad fade-up">
-          <div class="section-head" style="margin-bottom:14px;">
-            <div>
-              <h2>Selected Publications</h2>
-              <p>Replace sample entries with your actual first-author papers and links.</p>
+<section class="page" id="page-research-pneumatic-power">
+      <div class="container detail-page-shell">
+        <a href="#" class="detail-back" data-page-link="research">← Back to Research</a>
+        <div class="detail-hero fade-up">
+          <div class="section-kicker">Theme 02</div>
+          <h2>Power sources for robotic actuation</h2>
+        </div>
+
+        <div class="detail-media-stack">
+          <article class="detail-media-row fade-up">
+            <div class="detail-media-cell video-side">
+              <video class="video-embed" controls playsinline preload="metadata">
+                <source src="assets/videos/Video_PneumaticSource1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="video-caption">Demo video 1 · operation of the pneumatic source</div>
             </div>
-          </div>
-          <ul class="list">
-            <li>
-              <strong>Soft Robotics · 2026</strong>
-              <span>Title placeholder for your recent first-author paper. Add DOI or PDF link here.</span>
-            </li>
-            <li>
-              <strong>IEEE/ASME TMECH · 2027</strong>
-              <span>Title placeholder for hardware or system-design paper.</span>
-            </li>
-            <li>
-              <strong>IEEE TNSRE · 2022</strong>
-              <span>Title placeholder for rehabilitation or robotics-related work.</span>
-            </li>
+            <div class="detail-media-cell figure-summary-side">
+              <div class="image-placeholder"><img src="assets/images/PneumaticSource_Fig1.jpg" alt="Low-heat low-noise pneumatic source figure" /></div>
+              <div class="inline-summary">
+                <h3>Low-heat and near-silent pneumatic source</h3>
+                <ul class="summary-points">
+                  <li>Integrated endothermic and exothermic chemical reactions were used to generate pneumatic power with reduced heat generation.</li>
+                  <li>The system was designed to provide mobile pneumatic power with low acoustic noise for soft robotic applications.</li>
+                  <li>The platform was demonstrated as a compact and quiet alternative to conventional compressed-air supply methods.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="detail-media-row fade-up square-video-layout">
+            <div class="detail-media-cell video-side">
+              <video class="video-embed" controls playsinline preload="metadata">
+                <source src="assets/videos/Video_PneumaticSource2.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="video-caption">Demo video 2 · self-temperature-regulating mechanism</div>
+            </div>
+            <div class="detail-media-cell figure-summary-side">
+              <div class="image-placeholder"><img src="assets/images/PneumaticSource_Fig2.jpg" alt="Self-temperature-regulating pneumatic source figure" /></div>
+              <div class="inline-summary">
+                <h3>Electronics-free, self-temperature-regulating pneumatic source</h3>
+                <ul class="summary-points">
+                  <li>An electronics-free pneumatic source was designed to maintain stable temperature while delivering portable pneumatic power.</li>
+                  <li>The system couples hydrogen peroxide decomposition with carbon dioxide phase change to achieve self-temperature regulation.</li>
+                  <li>The source was developed for robotic applications requiring quiet, mobile, and thermally stable pneumatic actuation.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <article class="related-pubs-card fade-up">
+          <h3>Related publications</h3>
+          <ul class="related-pubs-list">
+            <li><a href="https://journals.sagepub.com/doi/abs/10.1177/21695172261442062?__cf_chl_f_tk=2BtncMVlXqe0AgjL5_BrkjzBD2le8vkocPu7gcWnN9g-1783307953-1.0.1.1-IDa0oXo9tdgg.rBEmblnI0IYQKSsVu16E1GGNuxmWUM" target="_blank" rel="noopener noreferrer">Low-heat and near-silent pneumatic source driven by integrated endothermic–exothermic chemical reactions for soft robots.</a><br><span><em>Soft Robotics</em>, 2026.</span></li>
+            <li>Electronics-free, self-temperature-regulating pneumatic source for robotic applications.<br><span><em>IEEE/ASME Transactions on Mechatronics</em> (under review).</span></li>
+            <li>Jung Kim and Ung Heo. Pneumatic pressure generator and pneumatic actuator based on endothermic chemical reaction.<br><span>Korean Patent, 10-2936054, 2026, granted.</span></li>
+            <li>Jung Kim, Ung Heo, and Junhwan Choi. Portable pneumatic generator and wearable robot including same.<br><span>US Patent, 19199248, 2025, patent application filed.</span></li>
+            <li>Jung Kim, Ung Heo, and Junhwan Choi. Self-temperature-regulated mobile pneumatic source.<br><span>Korean Patent, 10-2025-0131901, 2025, patent application filed.</span></li>
+            <li>Jung Kim, Ung Heo, and Junhwan Choi. Portable pneumatic generator and wearable robot including same.<br><span>Korean Patent, 10-2024-0110980, 2024, patent application filed.</span></li>
           </ul>
         </article>
-
-        <aside class="panel card-pad fade-up">
-          <div class="section-head" style="margin-bottom:14px;">
-            <div>
-              <h2>Experience Timeline</h2>
-              <p>A short timeline keeps the site structured without feeling crowded.</p>
-            </div>
-          </div>
-          <div class="timeline">
-            <div class="panel timeline-item" style="box-shadow:none; background:rgba(255,255,255,.58);">
-              <div class="timeline-year">Now</div>
-              <div>
-                <h3>Postdoctoral Researcher</h3>
-                <p>Hardware-centric research spanning robotic systems, experimental platforms, and publications in preparation.</p>
-              </div>
-            </div>
-            <div class="panel timeline-item" style="box-shadow:none; background:rgba(255,255,255,.58);">
-              <div class="timeline-year">Ph.D.</div>
-              <div>
-                <h3>Research in robotics and custom hardware</h3>
-                <p>Built multiple mechatronic systems across actuation, sensing, and validation workflows.</p>
-              </div>
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
 
-    <section id="contact">
+    <section class="page" id="page-research-hmi">
+      <div class="container detail-page-shell">
+        <a href="#" class="detail-back" data-page-link="research">← Back to Research</a>
+        <div class="detail-hero fade-up">
+          <div class="section-kicker">Theme 03</div>
+          <h2>Human-machine interfaces</h2>
+        </div>
+
+        <div class="hmi-media-stack">
+          <article class="video-card hmi-primary-video fade-up">
+            <video class="video-embed" controls playsinline preload="metadata">
+              <source src="assets/videos/Video_HMI1.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="video-caption">Demo video 1 · real-time bioimpedance and sEMG signals</div>
+          </article>
+
+          <div class="hmi-second-row">
+            <article class="video-card hmi-secondary-video fade-up">
+              <video class="video-embed" controls playsinline preload="metadata">
+                <source src="assets/videos/Video_HMI2.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="video-caption">Demo video 2 · real-time prosthesis control</div>
+            </article>
+
+            <article class="image-summary-card fade-up">
+              <div class="image-placeholder hmi-figure"><img src="assets/images/HMI_Fig1.jpg" alt="Human-machine interface sensing and control figure" /></div>
+            </article>
+          </div>
+        </div>
+
+        <article class="detail-summary-card fade-up">
+          <h3>Summary</h3>
+          <ul class="summary-points">
+            <li>A hybrid bioimpedance and sEMG sensor was developed to capture both muscle morphology and muscle activation.</li>
+            <li>The hybrid sensor can reflect motion under various dynamic conditions.</li>
+            <li>Real-time gait phase classification was implemented and applied to robotic prosthesis control for a lower-limb amputee.</li>
+          </ul>
+        </article>
+
+        <article class="related-pubs-card fade-up">
+          <h3>Related publications</h3>
+          <ul class="related-pubs-list">
+            <li><a href="https://ieeexplore.ieee.org/abstract/document/10340105" target="_blank" rel="noopener noreferrer">Development of a bioimpedance and sEMG fusion sensor for gait phase detection: validation with a transtibial amputee.</a><br><span><em>45th Annual International Conference of the IEEE Engineering in Medicine &amp; Biology Society (EMBC)</em>, 2023.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="page" id="page-projects">
       <div class="container">
-        <article class="panel card-pad contact-card fade-up">
-          <div class="section-head" style="margin-bottom:4px;">
-            <div>
-              <h2>Contact</h2>
-              <p>Keep this section simple and easy to scan. Add a downloadable CV link here.</p>
-            </div>
-          </div>
+        <div class="section-head fade-up">
+          <h2>Projects</h2>
+        </div>
 
-          <div class="contact-grid">
-            <div class="contact-item">
-              <div class="label">Email</div>
-              <div class="value">your.email@example.com</div>
+        <div class="project-grid">
+          <article class="project-card fade-up">
+            <div class="project-content no-media">
+              <div class="project-body">
+                <div class="project-date">Mar. 2026 – Present</div>
+                <h3>Development of a chemical-based back support exoskeleton</h3>
+                <p>Developing a chemically driven, silent back support exoskeleton.</p>
+                <p><b>Funding:</b> Ministry of Science and ICT (MSIT)</p>
+                <p class="project-role"><b>Role:</b> Development of a chemical-based pneumatic power source, back support exoskeleton, and experimental platform.</p>
+                <div class="pill-row">
+                  <span class="pill">Chemical pneumatic source</span>
+                  <span class="pill">Back support exoskeleton</span>
+                  <span class="pill">Experimental platform</span>
+                </div>
+              </div>
             </div>
-            <div class="contact-item">
-              <div class="label">Location</div>
-              <div class="value">Seoul / Suwon / Korea</div>
-            </div>
-            <div class="contact-item">
-              <div class="label">Google Scholar</div>
-              <div class="value">Add your scholar link</div>
-            </div>
-            <div class="contact-item">
-              <div class="label">LinkedIn / GitHub</div>
-              <div class="value">Add your professional links</div>
-            </div>
-          </div>
+          </article>
 
-          <div class="hero-actions" style="margin-top: 4px;">
-            <a class="btn btn-primary" href="#">Download CV (PDF)</a>
-            <a class="btn btn-secondary" href="mailto:your.email@example.com">Get in touch</a>
+          <article class="project-card fade-up">
+            <div class="project-content">
+              <div class="project-media project-media-fit"><img src="assets/images/Projects_ExosuitSensor_Fig.jpg" alt="Wearable sensor for exosuit control" /></div>
+              <div class="project-body">
+                <div class="project-date">Jun. 2022 – Jun. 2025</div>
+                <h3>Wearable sensor for exosuit control</h3>
+                <p>Developed an integrated bioimpedance-sEMG sensor for biosignal-based exosuit control for elderly users.</p>
+                <p class="project-role"><b>Role:</b> Sensor development, biosignal acquisition, and signal processing for a deep learning-based gait classification system.</p>
+                <div class="pill-row">
+                  <span class="pill">Bioimpedance</span>
+                  <span class="pill">sEMG</span>
+                  <span class="pill">Exosuit control</span>
+                  <span class="pill">Gait classification</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card fade-up">
+            <div class="project-content no-media">
+              <div class="project-body">
+                <div class="project-date">Dec. 2022 – Jun. 2025</div>
+                <h3>Pneumatic actuation system for drone perching</h3>
+                <p>Designed a pneumatic actuation system for a soft-gripper-based drone perching mechanism intended to support extended military operations.</p>
+                <div class="project-role-pills">
+                  <p class="project-role"><b>Role:</b> Pneumatic actuation system design for soft grippers.</p>
+                  <div class="pill-row">
+                    <span class="pill">Soft gripper</span>
+                    <span class="pill">Pneumatic actuation</span>
+                    <span class="pill">Drone perching</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card fade-up">
+            <div class="project-content no-media">
+              <div class="project-body">
+                <div class="project-date">Aug. 2021 – Dec. 2022</div>
+                <h3>Ergonomic chair design with musculoskeletal simulation</h3>
+                <p>Contributed to the design of a comfortable chair frame and tilting mechanism, supported by musculoskeletal simulation and physiological evaluation.</p>
+                <p class="project-role"><b>Role:</b> Tilting mechanism design, AnyBody musculoskeletal simulation, and physiological measurement for evaluation.</p>
+                <div class="pill-row">
+                  <span class="pill">Mechanism design</span>
+                  <span class="pill">AnyBody</span>
+                  <span class="pill">Ergonomics</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card fade-up">
+            <div class="project-content">
+              <div class="project-media project-media-fit"><img src="assets/images/Projects_ProsthesisControl_Fig.jpg" alt="Robotic prosthesis control with biosignals" /></div>
+              <div class="project-body">
+                <div class="project-date">Sept. 2020 – Dec. 2022</div>
+                <h3>Robotic prosthesis control with biosignals</h3>
+                <p>Developed a robotic prosthesis control framework based on an integrated bioimpedance-sEMG biosignal sensor.</p>
+                <p class="project-role"><b>Role:</b> Project manager; developed the biosignal sensor, deep learning-based real-time gait classifier, and robotic prosthesis controller.</p>
+                <div class="pill-row">
+                  <span class="pill">Robotic prosthesis</span>
+                  <span class="pill">Bioimpedance</span>
+                  <span class="pill">sEMG</span>
+                  <span class="pill">Real-time control</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card fade-up">
+            <div class="project-content">
+              <div class="project-media project-media-slight-shrink"><img src="assets/images/Projects_AFO_Fig.jpg" alt="Mobile pneumatic ankle-foot orthosis" /></div>
+              <div class="project-body">
+                <div class="project-date">Mar. 2018 – Jun. 2022</div>
+                <h3>Mobile pneumatic ankle-foot orthosis for drop foot patients</h3>
+                <p>Developed and evaluated a mobile pneumatic ankle-foot orthosis for patients with drop foot in collaboration with clinical and manufacturing partners.</p>
+                <p class="project-role"><b>Role:</b> Enhanced the microcompressor and AFO design; conducted patient experiments for performance evaluation.</p>
+                <div class="pill-row">
+                  <span class="pill">AFO</span>
+                  <span class="pill">Pneumatic system</span>
+                  <span class="pill">Patient experiments</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card fade-up">
+            <div class="project-content">
+              <div class="project-media project-media-fit"><img src="assets/images/Projects_BackSupport_Fig.jpg" alt="Pneumatic back support exoskeleton" /></div>
+              <div class="project-body">
+                <div class="project-date">May 2019 – Dec. 2019</div>
+                <h3>Pneumatic back support exoskeleton for laborers</h3>
+                <p>Developed a pneumatic back support exoskeleton and assistive strategy to reduce low-back loading during lifting tasks.</p>
+                <p class="project-role"><b>Role:</b> Project manager; developed the exoskeleton, implemented sEMG-based lifting detection, and conducted human experiments.</p>
+                <div class="pill-row">
+                  <span class="pill">Back support</span>
+                  <span class="pill">Wearable robot</span>
+                  <span class="pill">sEMG trigger</span>
+                  <span class="pill">Human experiments</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card fade-up">
+            <div class="project-content lower-limb-project">
+              <div class="project-media"><img src="assets/images/Projects_LowerLimbExoskeleton_Fig.jpg" alt="sEMG-controlled lower-limb exoskeleton" /></div>
+              <div class="project-body">
+                <div class="project-date">Jun. 2018 – Dec. 2018</div>
+                <h3>sEMG-controlled lower-limb exoskeleton</h3>
+                <p>Developed a lower-limb exoskeleton control approach using sEMG-based motion intention detection.</p>
+                <div class="project-role-pills lower-limb-role-pills">
+                  <p class="project-role"><b>Role:</b> Exoskeleton design and sEMG signal processing for control/evaluation.</p>
+                  <div class="pill-row">
+                    <span class="pill">Lower-limb exoskeleton</span>
+                    <span class="pill">sEMG</span>
+                    <span class="pill">Intention detection</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-publications">
+      <div class="container">
+        <div class="section-head fade-up">
+                    <h2>Publications</h2>
+          <p>
+            Journal publications, papers in review or preparation, conference papers, conference abstracts and presentations, and patents.
+          </p>
+          <div class="inline-links" style="margin-top: 14px;">
+            <a class="btn btn-outline" href="https://scholar.google.co.kr/citations?user=jZIw4DkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer"><span class="btn-icon" aria-hidden="true">🎓</span>Google Scholar</a>
           </div>
-        </article>
+        </div>
+
+        <div class="pub-grid">
+          <article class="panel fade-up">
+            <h3>Journal Publications</h3>
+            <ul class="list">
+              <li>
+                <strong>[J1] Low-heat and near-silent pneumatic source driven by integrated endothermic–exothermic chemical reactions for soft robots.</strong>
+                <span><b>Ung Heo</b>, Junhwan Choi, Sangjoon J. Kim, and Jung Kim. <b><em>Soft Robotics</em></b>, 2026.</span>
+              </li>
+              <li>
+                <strong>[J2] Skin preparation–free, stretchable microneedle adhesive patches for reliable electrophysiological sensing and exoskeleton robot control.</strong>
+                <span>Heesoo Kim, Juhyun Lee, <b>Ung Heo</b>, Dhileep Kumar Jayashankar, Karen-Christian Agno, Yeji Kim, Choong Yeon Kim et al. <b><em>Science Advances</em></b>, 2024.</span>
+              </li>
+              <li>
+                <strong>[J3] sEMG-triggered fast assistance strategy for a pneumatic back support exoskeleton.</strong>
+                <span><b>Ung Heo</b>, Jirou Feng, Sangjoon J. Kim, and Jung Kim. <b><em>IEEE Transactions on Neural Systems and Rehabilitation Engineering</em></b>, 2022.</span>
+              </li>
+              <li>
+                <strong>[J4] Backdrivable and fully-portable pneumatic back support exoskeleton for lifting assistance.</strong>
+                <span><b>Ung Heo</b>, Sangjoon J. Kim, and Jung Kim. <b><em>IEEE Robotics and Automation Letters</em></b>, 2020.</span>
+              </li>
+              <li>
+                <strong>[J5] Recognition of walking environments and gait period by surface electromyography.</strong>
+                <span>Seulki Kyeong, Wonseok Shin, Minjin Yang, <b>Ung Heo</b>, Jirou Feng, and Jung Kim. <b><em>Frontiers of Information Technology &amp; Electronic Engineering</em></b>, 2019.</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="panel fade-up">
+            <h3>Journal Papers in Review or in Preparation</h3>
+            <ul class="list">
+              <li>
+                <strong>[U1] Electronics-free, self-temperature-regulating pneumatic source for robotic applications.</strong>
+                <span><b>Ung Heo</b>, Junhwan Choi, Seongjong Shin, Youngsuk Nam, Sangjoon J. Kim, and Jung Kim. <b><em>IEEE/ASME Transactions on Mechatronics</em></b> (Under review).</span>
+              </li>
+              <li>
+                <strong>[U2] A closed-loop phase-change pneumatic source enabling bidirectional pressure generation for soft actuation.</strong>
+                <span><b>Ung Heo</b> and Sangjoon J. Kim. (In preparation).</span>
+              </li>
+              <li>
+                <strong>[U3] A back support exoskeleton based on a closed-loop phase-change pneumatic source.</strong>
+                <span><b>Ung Heo</b> and Sangjoon J. Kim. (In preparation).</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="panel fade-up">
+            <h3>Conference Papers</h3>
+            <ul class="list">
+              <li>
+                <strong>[C1] Development of a bioimpedance and sEMG fusion sensor for gait phase detection: validation with a transtibial amputee.</strong>
+                <span><b>Ung Heo</b>, Hyunho Jeong, Jirou Feng, Junhwi Cho, Kyungseo Park, Youngsik Yoon, Dongyeon Lee, and Jung Kim. <b><em>2023 45th Annual International Conference of the IEEE Engineering in Medicine &amp; Biology Society (EMBC)</em></b>, 2023. (Oral presentation)</span>
+              </li>
+              <li>
+                <strong>[C2] Backdrivable and fully-portable pneumatic back support exoskeleton for lifting assistance.</strong>
+                <span><b>Ung Heo</b>, Sangjoon J. Kim, and Jung Kim. <b><em>2020 IEEE International Conference on Robotics and Automation (ICRA)</em></b>, 2020. (with journal option)</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="panel fade-up">
+            <h3>Conference Abstracts and Presentations</h3>
+            <ul class="list">
+              <li><strong>[A1] Self-regulating low-noise mobile pneumatic source for wearable robots in diverse environments.</strong> <span><b>Ung Heo</b>, Jung Kim, and Sangjoon J. Kim. <b><em>IFAC</em></b>, 2026. (accepted)</span></li>
+              <li><strong>[A2] Evaluating portable pneumatic power sources for wearable robots: flow density and acoustic noise comparison.</strong> <span><b>Ung Heo</b>, Jung Kim, and Sangjoon J. Kim. <b><em>ICNR</em></b>, 2026. (accepted)</span></li>
+              <li><strong>[A3] Experimental evaluation of various pneumatic generators for pneumatically driven wearable robots.</strong> <span><b>Ung Heo</b>, Sangjoon J. Kim, and Jung Kim. <b><em>Korean Society of Biomechanics</em></b>, 2025.</span></li>
+              <li><strong>[A4] Hybrid wearable sensor using Hall sensor and sEMG for joint dynamics estimation.</strong> <span><b>Ung Heo</b> and Jung Kim. <b><em>IEEE-EMBS BSN</em></b>, 2024.</span></li>
+              <li><strong>[A5] Development and control method of chemical reaction-based pneumatic source for wearable robots.</strong> <span><b>Ung Heo</b> and Jung Kim. <b><em>ICROS</em></b>, 2024.</span></li>
+              <li><strong>[A6] Development of a fabric-based pneumatic bistable gripper for drone perching.</strong> <span>Woojong Kim, <b>Ung Heo</b>, Sangha Jeon, and Jung Kim. <b><em>ICROS</em></b>, 2024.</span></li>
+              <li><strong>[A7] sEMG-hall sensor integrated wearable sensor for joint dynamics estimation.</strong> <span><b>Ung Heo</b> and Jung Kim. <b><em>Korean Society of Biomechanics</em></b>, 2024.</span></li>
+              <li><strong>[A8] Gait phase estimation for robotic prosthesis control based on bioimpedance.</strong> <span><b>Ung Heo</b>, Hyunho Jeong, Chaeree Park, Dayoung Yeom, and Jung Kim. <b><em>KRoC</em></b>, 2023.</span></li>
+              <li><strong>[A9] Wearable bioimpedance and electromyography integrated sensor for motion intention detection.</strong> <span><b>Ung Heo</b> and Jung Kim. <b><em>Korean Society of Biomechanics</em></b>, 2021.</span></li>
+              <li><strong>[A10] Evaluation of sEMG-triggered rapid assistance in back support exoskeleton.</strong> <span><b>Ung Heo</b> and Jung Kim. <b><em>KSPE Conference</em></b>, 2021.</span></li>
+            </ul>
+          </article>
+
+          <article class="panel fade-up">
+            <h3>Patents</h3>
+            <ul class="list">
+              <li><strong>[P1] Pneumatic pressure generator and pneumatic actuator based on endothermic chemical reaction.</strong> <span>Jung Kim and <b>Ung Heo</b>. Korean Patent, 10-2936054 (2026), granted.</span></li>
+              <li><strong>[P2] Portable pneumatic generator and wearable robot including same.</strong> <span>Jung Kim, <b>Ung Heo</b>, and Junhwan Choi. US Patent, 19199248 (2025), patent application has been done.</span></li>
+              <li><strong>[P3] Self-temperature-regulated mobile pneumatic source.</strong> <span>Jung Kim, <b>Ung Heo</b>, and Junhwan Choi. Korean Patent, 10-2025-0131901 (2025), patent application has been done.</span></li>
+              <li><strong>[P4] Portable pneumatic generator and wearable robot including same.</strong> <span>Jung Kim, <b>Ung Heo</b>, and Junhwan Choi. Korean Patent, 10-2024-0110980 (2024), patent application has been done.</span></li>
+            </ul>
+          </article>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      Designed as a calm single-file portfolio for GitHub Pages. Replace placeholders with your own content, images, and links.
-    </div>
-  </footer>
 
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
 
-    const sections = document.querySelectorAll('main section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const pageButtons = document.querySelectorAll('[data-page]');
+    const pageLinks = document.querySelectorAll('[data-page-link]');
+    const pages = document.querySelectorAll('.page');
 
-    const setActive = () => {
-      let currentId = 'home';
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 120 && rect.bottom >= 120) {
-          currentId = section.id;
-        }
+    function getNavPage(pageName) {
+      return pageName.startsWith('research-') ? 'research' : pageName;
+    }
+
+    function showPage(pageName) {
+      pages.forEach((page) => {
+        page.classList.toggle('active', page.id === `page-${pageName}`);
       });
-
-      navLinks.forEach((link) => {
-        const href = link.getAttribute('href')?.replace('#', '');
-        link.classList.toggle('active', href === currentId);
+      const navPage = getNavPage(pageName);
+      pageButtons.forEach((button) => {
+        button.classList.toggle('active', button.dataset.page === navPage);
       });
-    };
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    window.addEventListener('scroll', setActive, { passive: true });
-    window.addEventListener('load', setActive);
+    pageButtons.forEach((button) => {
+      button.addEventListener('click', () => showPage(button.dataset.page));
+    });
+
+    pageLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage(link.dataset.pageLink);
+      });
+    });
   </script>
 </body>
 </html>
